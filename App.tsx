@@ -1,32 +1,76 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import {createStackNavigator, createAppContainer} from 'react-navigation'
 import Main from './pages/Main'
+import Settings from './pages/Settings'
+import History from './pages/History'
+import { View, TouchableHighlight, Image } from 'react-native'
 
-export const Pages = {
-  Main: <Main/>
-}
+//onPress={()=>{navigation.navigate("history")}}
 
-export default class extends React.Component {
-  state = {
-    page: Pages.Main
-  }
-
+class NavIcons extends React.Component<{navigation: any}, {}> {
   render() {
+    let { navigate } = this.props.navigation
+
     return (
-      <View style={styles.container}>
-        { this.state.page }
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: "flex-end",
+        }}
+      >
+        <TouchableHighlight
+          onPress={()=>{navigate("history")}}
+        >
+          <Image
+              style={{
+                width: 30, height: 30,
+                margin: 10,
+                tintColor: "black"
+              }}
+              source={require('./assets/history.png')}
+          />
+        </TouchableHighlight>
+
+        <TouchableHighlight
+          onPress={()=>{navigate("settings")}}
+        >
+          <Image
+              style={{
+                width: 30, height: 30,
+                margin: 10,
+                tintColor: "black"
+              }}
+              source={require('./assets/settings.png')}
+          />
+        </TouchableHighlight>
       </View>
     )
   }
-
-  goTo(page) {
-    this.setState({page})
-  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+const MainNavigator = createStackNavigator({
+  main: {
+    screen: Main,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <NavIcons navigation={navigation} />
+    })
   },
-});
+  settings: {
+    screen: Settings,
+    navigationOptions: {
+      title: "Settings"
+    }
+  },
+  history: {
+    screen: History,
+    navigationOptions: {
+      title: "History"
+    }
+  }
+}, {
+  initialRouteName: "main"
+})
+
+const App = createAppContainer(MainNavigator)
+
+export default App

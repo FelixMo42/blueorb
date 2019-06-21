@@ -4,8 +4,12 @@ import { Camera } from 'expo-camera'
 import * as Permissions from 'expo-permissions';
 import Menu from '../props/Menu'
 
-export default class extends React.Component {
+export default class extends React.Component<{navigation: () => void}, {}> {
     camera: Camera
+
+    navigationOptions = {
+        title: "main"
+    }
 
     state = {
         hasCameraPermission: null,
@@ -25,25 +29,16 @@ export default class extends React.Component {
                     ref={ref => {
                         this.camera = ref;
                     }}
-                    onPress={this.takePicture}
                     useCamera2Api={false}
-                >
-                    <TouchableHighlight
-                        onPress={ () => { this.takePicture() } }
-                        style={{flex: 1}}
-                    >
-                        <Menu/>
-                    </TouchableHighlight>
-                </Camera>
+                />
             </View>
         )
     }
 
     async takePicture() {
         console.log("start")
-        let photo = await this.camera.takePictureAsync();
+        this.props.navigation()
+        let photo = await this.camera.takePictureAsync()
         console.log("end")
-
-        
     }
 }

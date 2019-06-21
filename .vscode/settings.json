@@ -11,6 +11,7 @@
         "package.json": true,
         "babel.config.js": true,
         "app.json": true,
-        "node_modules": true
+        "node_modules": true,
+        "package-lock.json": true
     }
 }
