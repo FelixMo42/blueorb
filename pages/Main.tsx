@@ -2,9 +2,8 @@ import React from 'react'
 import { View, TouchableHighlight } from 'react-native'
 import { Camera } from 'expo-camera'
 import * as Permissions from 'expo-permissions';
-import Menu from '../props/Menu'
 
-export default class extends React.Component<{navigation: () => void}, {}> {
+export default class extends React.Component<{navigation: any}, {}> {
     camera: Camera
 
     navigationOptions = {
@@ -23,22 +22,26 @@ export default class extends React.Component<{navigation: () => void}, {}> {
 
     render() {
         return (
-            <View style={{flex: 1}}>
-                <Camera
+            <Camera
+                style={{flex: 1}}
+                ref={ref => {
+                    this.camera = ref
+                }}
+                useCamera2Api={false}
+                autoFocus={false}
+            >
+                <TouchableHighlight
                     style={{flex: 1}}
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    useCamera2Api={false}
-                />
-            </View>
+                    onPress={() => (this.takePicture())}
+                >
+                    <View></View>
+                </TouchableHighlight>   
+            </Camera>
         )
     }
 
     async takePicture() {
-        console.log("start")
-        this.props.navigation()
         let photo = await this.camera.takePictureAsync()
-        console.log("end")
+        this.props.navigation.navigate('output', { photo: photo })
     }
 }

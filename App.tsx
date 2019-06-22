@@ -3,24 +3,19 @@ import {createStackNavigator, createAppContainer} from 'react-navigation'
 import Main from './pages/Main'
 import Settings from './pages/Settings'
 import History from './pages/History'
+
 import { View, TouchableHighlight, Image } from 'react-native'
-
-//onPress={()=>{navigation.navigate("history")}}
-
+import Output from './pages/Output';
 class NavIcons extends React.Component<{navigation: any}, {}> {
   render() {
     let { navigate } = this.props.navigation
 
     return (
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: "flex-end",
-        }}
-      >
-        <TouchableHighlight
-          onPress={()=>{navigate("history")}}
-        >
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: "flex-end",
+      }} >
+        <TouchableHighlight onPress={()=>{navigate("history")}} >
           <Image
               style={{
                 width: 30, height: 30,
@@ -31,9 +26,7 @@ class NavIcons extends React.Component<{navigation: any}, {}> {
           />
         </TouchableHighlight>
 
-        <TouchableHighlight
-          onPress={()=>{navigate("settings")}}
-        >
+        <TouchableHighlight onPress={()=>{navigate("settings")}} >
           <Image
               style={{
                 width: 30, height: 30,
@@ -66,6 +59,12 @@ const MainNavigator = createStackNavigator({
     navigationOptions: {
       title: "History"
     }
+  },
+  output: {
+    screen: Output,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <NavIcons navigation={navigation} />
+    })
   }
 }, {
   initialRouteName: "main"
