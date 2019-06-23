@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, TouchableHighlight } from 'react-native'
+import { takeSnapshotAsync } from 'expo'
 import { Camera } from 'expo-camera'
-import * as Permissions from 'expo-permissions';
+import * as Permissions from 'expo-permissions'
 
 export default class extends React.Component<{navigation: any}, {}> {
     camera: Camera
@@ -28,7 +29,6 @@ export default class extends React.Component<{navigation: any}, {}> {
                     this.camera = ref
                 }}
                 useCamera2Api={false}
-                autoFocus={false}
             >
                 <TouchableHighlight
                     style={{flex: 1}}
@@ -41,7 +41,11 @@ export default class extends React.Component<{navigation: any}, {}> {
     }
 
     async takePicture() {
-        let photo = await this.camera.takePictureAsync()
+        let photo = await takeSnapshotAsync(this.camera, {
+            result: 'data-uri',
+            height: 512
+        })
+        
         this.props.navigation.navigate('output', { photo: photo })
     }
 }

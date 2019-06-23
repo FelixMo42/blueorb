@@ -22,8 +22,11 @@ export const Item = ({title, body}) => (
 )
 
 export default class extends React.Component<{navigation: any, photo: any}, {}> {
+    photo() {
+        return this.props.navigation.state.params.photo
+    }
+
     render() {
-        let { photo } = this.props.navigation.state.params
         /*return (
             <View>
                 <Item title={"Plastic Bag"} body={"Throw it in the trash. Do not recycle it."}/>
@@ -31,13 +34,15 @@ export default class extends React.Component<{navigation: any, photo: any}, {}> 
             </View>
         )*/
 
+        return this.displayImage()
+    }
+
+    displayImage() {
         return (
             <Image
                 style={{flex: 1}}
-                source={{uri: photo.uri}}
+                source={{uri: this.photo()}}
             />
         )
     }
 }
-
-//<Text>{ photo.uri }</Text>

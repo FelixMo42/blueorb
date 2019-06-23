@@ -3,9 +3,9 @@ import {createStackNavigator, createAppContainer} from 'react-navigation'
 import Main from './pages/Main'
 import Settings from './pages/Settings'
 import History from './pages/History'
-
 import { View, TouchableHighlight, Image } from 'react-native'
-import Output from './pages/Output';
+import Output from './pages/Output'
+
 class NavIcons extends React.Component<{navigation: any}, {}> {
   render() {
     let { navigate } = this.props.navigation
@@ -70,6 +70,4 @@ const MainNavigator = createStackNavigator({
   initialRouteName: "main"
 })
 
-const App = createAppContainer(MainNavigator)
-
-export default App
+export default createAppContainer(MainNavigator)
