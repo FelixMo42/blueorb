@@ -43,8 +43,11 @@ export default class extends React.Component<{navigation: any}, {}> {
     async takePicture() {
         let photo = await takeSnapshotAsync(this.camera, {
             result: 'data-uri',
-            height: 512
+            height: 12,
+            width: 12
         })
+
+        photo = photo.replace("data:image/png;base64,", "")
         
         this.props.navigation.navigate('output', { photo: photo })
     }

@@ -1,11 +1,11 @@
 import Clarifai from "clarifai"
-import { CLARIFAI_KEY } from "./Keys";
+import { CLARIFAI_KEY } from "./Keys"
+
+process.nextTick = setImmediate
 
 const app = new Clarifai.App({
     apiKey: CLARIFAI_KEY
 })
-
-
 
 export default {
     get(image: string) {

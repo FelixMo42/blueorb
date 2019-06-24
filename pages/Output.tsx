@@ -31,8 +31,17 @@ export default class extends React.Component<{navigation: any, photo: any}, {}> 
         ImageApi.get(this.photo()).then((response) => {
             console.log(response)
         }).catch((error) => {
-            console.log("error");
+            console.log(error)
         })
+
+        /*
+            data
+            status
+            statusText
+            headers
+            config
+            request
+        */
 
         return this.displayImage()
     }
