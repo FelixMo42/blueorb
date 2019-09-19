@@ -45,6 +45,7 @@ const MainNavigator = createStackNavigator({
   main: {
     screen: Main,
     navigationOptions: ({ navigation }) => ({
+      title: "BlueOrb",
       headerRight: <NavIcons navigation={navigation} />
     })
   },

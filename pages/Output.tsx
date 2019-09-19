@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, ScrollView } from 'react-native'
 import Line from '../props/Line'
 import ImageApi from '../api/ImageApi'
 
@@ -22,35 +22,48 @@ export const Item = ({title, body}) => (
     </View>
 )
 
-export default class extends React.Component<{navigation: any, photo: any}, {}> {
+export default class extends React.Component<{navigation: any, photo: any}, any> {
+    state = {
+        items: []
+    }
+
     photo() {
         return this.props.navigation.state.params.photo
     }
 
-    render() {
+    componentDidMount() {
         ImageApi.get(this.photo()).then((response) => {
-            console.log(response)
+            let items = []
+
+            for (let concept of response.outputs[0].data.concepts) {
+                console.log(concept)
+                items.push( {
+                    title: concept.name,
+                    body: "TBD"
+                } )
+            }
+
+            this.setState({items: items})
         }).catch((error) => {
-            console.log(error)
+            console.log("error")
         })
-
-        /*
-            data
-            status
-            statusText
-            headers
-            config
-            request
-        */
-
-        return this.displayImage()
     }
 
-    displayImage() {
+    render() {
+        return (
+            <ScrollView style={{paddingBottom: 10}}>
+                { this.state.items.map((item) => (
+                    <Item title={item.title} body={item.body} key={item.title} />
+                )) }
+            </ScrollView>
+        )
+    }
+
+    renderImage() {
         return (
             <Image
                 style={{flex: 1}}
-                source={{uri: this.photo()}}
+                source={{uri: "data:image/png;base64," + this.photo()}}
             />
         )
     }
