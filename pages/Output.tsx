@@ -35,8 +35,9 @@ export default class extends React.Component<{navigation: any, photo: any}, any>
         ImageApi.get(this.photo()).then((response) => {
             let items = []
 
-            for (let concept of response.outputs[0].data.concepts) {
+            for (let concept of response) {
                 console.log(concept)
+
                 items.push( {
                     title: concept.name,
                     body: "TBD"
@@ -45,7 +46,7 @@ export default class extends React.Component<{navigation: any, photo: any}, any>
 
             this.setState({items: items})
         }).catch((error) => {
-            console.log("error")
+            console.log(error)
         })
     }
 

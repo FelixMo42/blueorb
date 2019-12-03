@@ -8,20 +8,24 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@types/node": "^12.0.10",
-    "clarifai": "^2.9.0",
-    "expo": "^33.0.0",
+    "@react-native-firebase/app": "^6.1.0",
+    "@react-native-firebase/auth": "^6.1.0",
+    "@react-native-firebase/database": "^6.1.0",
+    "@react-native-firebase/firestore": "^6.1.0",
+    "@types/node": "^12.12.14",
+    "clarifai": "^2.9.1",
+    "expo": "^35.0.1",
     "react": "16.8.3",
-    "react-dom": "^16.8.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
-    "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-dom": "^16.12.0",
+    "react-native": "^0.61.5",
+    "react-native-web": "^0.11.7",
+    "react-navigation": "^3.13.0"
   },
   "devDependencies": {
-    "@types/react": "^16.8.19",
-    "@types/react-native": "^0.57.60",
+    "@types/react": "^16.9.14",
+    "@types/react-native": "^0.57.65",
     "babel-preset-expo": "^5.1.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.7.2"
   },
   "private": true
 }
